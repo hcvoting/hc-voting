@@ -1,0 +1,35 @@
+[package]
+name = "HC-Voting"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = "0.7.8"
+
+# serde + derive in one line
+serde = { version = "1.0", features = ["derive"] }
+
+# Use curv-kzen under the crate name `curv` (so your `use curv::...` compiles)
+curv = { package = "curv-kzen", version = "0.10", default-features = false, features = ["num-bigint"] }
+
+merlin = { version = "3.0.0", default-features = false }
+sha2 = "0.9"
+generic-array = "0.14"
+ark-secp256k1 = { version = "0.4.0", default-features = false }
+ark-ff         = { version = "0.4",   default-features = false }
+rand = "0.8.5"
+rand_chacha = "0.3"
+VarRange = { path = "./VarRange" }
+
+# Bulletproofs + dalek, no std-curve deps needed from them
+bulletproofs = { version = "5.0", default-features = false }
+curve25519-dalek = { version = "4", default-features = false }
+
+[features]
+# No special default features; importantly, no gmp-related stuff here.
+default = []
+
+# Benchmark tests
+[[test]]
+name = "hc_benchmark"
+path = "tests/hc_benchmarks.rs"
